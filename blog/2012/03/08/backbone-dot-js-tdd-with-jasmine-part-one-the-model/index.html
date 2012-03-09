@@ -119,7 +119,7 @@
 <p>Don&#8217;t forget about <code>rake db:create:all</code> and <code>rake db:migrate</code>.<br/>
 You could seed the database with initial tasks: <code>rake db:seed</code>.</p>
 
-<p>Now you can run rails: <code>rails s</code> and navigate to <code>http://localhost:3000</code>.. and you should see nothing special, just an another todo list app without any fancy features and javascripts.</p>
+<p>Now you can run rails: <code>rails s</code> and navigate to <code>http://localhost:3000</code>.. and you should see nothing special, just an another todo list app without any fancy features and JavaScripts.</p>
 
 <h3>Gems used in the project</h3>
 
@@ -179,7 +179,7 @@ You could seed the database with initial tasks: <code>rake db:seed</code>.</p>
 
 <h3>Running the tests</h3>
 
-<p>Initial application already contains pre-configured Guardfile for jasmine. It can run javascript specs for our application without the browser!</p>
+<p>Initial application already contains pre-configured Guardfile for jasmine. It can run JavaScript specs for our application without the browser!</p>
 
 <figure class='code'><figcaption><span>Guardfile  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -197,7 +197,7 @@ You could seed the database with initial tasks: <code>rake db:seed</code>.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>In order to execute our javascript tests just type in the console <code>guard --group frontend</code> wait for boot the rails and after several seconds you should see the following output:</p>
+<p>In order to execute our JavaScript tests just type in the console <code>guard --group frontend</code> wait for rails to boot and after several seconds you should see the following output:</p>
 
 <figure class='code'><figcaption><span>tests results </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -257,7 +257,7 @@ You could seed the database with initial tasks: <code>rake db:seed</code>.</p>
 <ul>
 <li>We don&#8217;t have <code>TodoList.Models</code> namespace</li>
 <li>and Task model is not defined within this namespace</li>
-<li>required javascript files and dependencies are not loaded via assets pipeline</li>
+<li>required JavaScript files and dependencies are not loaded via assets pipeline</li>
 </ul>
 
 
@@ -305,7 +305,7 @@ You could seed the database with initial tasks: <code>rake db:seed</code>.</p>
 
 
 <p>In the first require section we require all necessary javascipt libraries: jQuery, underscore and finnaly Backbone.js
-Second section loads our application&#8217;s javascripts.</p>
+Second section loads our application&#8217;s JavaScripts.</p>
 
 <p>Add following content to the <code>./spec/javascripts/spec.js</code> file:</p>
 
@@ -317,7 +317,7 @@ Second section loads our application&#8217;s javascripts.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Those directives will load our application along with all test and helper files defined in the <code>./spec/javascripts</code> folder.</p>
+<p>These directives will load our application along with all test and helper files defined in the <code>./spec/javascripts</code> folder.</p>
 
 <p>And finally define initial <code>TodoList.Models.Task</code> class:</p>
 
@@ -436,7 +436,7 @@ Second section loads our application&#8217;s javascripts.</p>
 
 <h2>Step three: define getters</h2>
 
-<p>Generally backbone.js for fetching attributes values has build-in <code>model.get(attribute)</code> method, for instance <code>model.get('name')</code> or <code>model.get('complete')</code> but in my opinion this approach is prone to typos and other strange errors. To avoid this kind of problems in my backbone models I&#8217;m creating getters for all model&#8217;s attributes, for example the <code>name</code> attribute will have <code>model.getName()</code> method.</p>
+<p>Generally backbone.js for fetching attributes values has a build-in <code>model.get(attribute)</code> method, for instance <code>model.get('name')</code> or <code>model.get('complete')</code> but in my opinion this approach is prone to typos and other strange errors. To avoid this kind of problems in my backbone models I&#8217;m creating getters for all model&#8217;s attributes, for example the <code>name</code> attribute will have <code>model.getName()</code> method.</p>
 
 <p>Lets create a simple test case for those methods.
 First of all create a <code>model.getId()</code> method:</p>
@@ -510,7 +510,7 @@ First of all create a <code>model.getId()</code> method:</p>
 </span><span class='line'>ERROR: 7 specs, 3 failures</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Let add implementation for the missing method</p>
+<p>Let&#8217;s add implementation for the missing method</p>
 
 <figure class='code'><figcaption><span>app/assets/javascripts/models/task.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -563,7 +563,7 @@ First of all create a <code>model.getId()</code> method:</p>
 
 <p>TIP 1: don&#8217;t forget to require sinon.js in our spec helper, just add <code>//= require sinon</code> to the <code>./spec/javascript/spec.js</code> file.</p>
 
-<p>TIP 2: sinon should be required before our javascripts specs.</p>
+<p>TIP 2: sinon should be required before our JavaScripts specs.</p>
 
 <figure class='code'><figcaption><span>spec/javascripts/models/task_spec.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -688,7 +688,7 @@ First of all create a <code>model.getId()</code> method:</p>
 
 <h2>Step four: creating and updating our model via ajax</h2>
 
-<p>For creating a new tasks and updating its <code>complete</code> flag we&#8217;ll use built-in in backbone <code>save</code> method. Let see whether this method meets all out requirements:</p>
+<p>For creating a new tasks and updating its <code>complete</code> flag we&#8217;ll use built-in in backbone <code>save</code> method. Let&#8217;s see whether this method meets all our requirements:</p>
 
 <figure class='code'><figcaption><span>spec/javascripts/models/task_spec.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -756,7 +756,7 @@ First of all create a <code>model.getId()</code> method:</p>
 
 
 <p>It seems that our model hasn&#8217;t required <code>url</code> property. Basically <code>url</code> can be a property or a function and it returns the relative URL where the model&#8217;s resource would be located on the server.
-Let add this property with some arbitrary value:</p>
+Let&#8217;s add this property with some arbitrary value:</p>
 
 <figure class='code'><figcaption><span>app/assets/javascripts/models/task.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1048,7 +1048,7 @@ In the backbone docs for this method we find the following description:</p>
 
 <p>Green again!</p>
 
-<p>TIP: we could define custom jasmine metchers in order to DRY a bit above test cases.</p>
+<p>TIP: we could define custom jasmine matchers in order to make the test cases above more DRY.</p>
 
 <p>Create <code>spec/javascripts/support/request_matchers.js</code> file with the following content:</p>
 
