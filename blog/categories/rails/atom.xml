@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails | Łukasz Kazimierz Bandzarewicz]]></title>
+  <link href="http://blog.bandzarewicz.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://blog.bandzarewicz.com/"/>
+  <updated>2012-03-09T11:14:47+01:00</updated>
+  <id>http://blog.bandzarewicz.com/</id>
+  <author>
+    <name><![CDATA[Łukasz Bandzarewicz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[KRUG Rails 3.1 Engines]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/07/04/krug-rails-engines/"/>
+    <updated>2011-07-04T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/07/04/krug-rails-engines</id>
+    <content type="html"><![CDATA[<p>Slajdy z prezentacji: <a href="http://blog.bandzarewicz.com/slides/krug-rails-3.1-engines">KRUG Rails 3.1 Engines</a></p>
+
+<h2>Kody źródłowe</h2>
+
+<ul>
+<li><p>Slajdy z prezentacji: <a href="https://github.com/lucassus/krug-rails-3.1-engines-slides">https://github.com/lucassus/krug-rails-3.1-engines-slides</a></p></li>
+<li><p>Przykładowy Rails 3.1 engine: <a href="https://github.com/lucassus/krug_forum">https://github.com/lucassus/krug_forum</a></p></li>
+<li><p>..i jego użycie: <a href="https://github.com/lucassus/krug_forum_demo">https://github.com/lucassus/krug_forum_demo</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rspec matcher for testing model's attr_protected fields]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/06/23/rspec-attr-protected-matcher/"/>
+    <updated>2011-06-23T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/06/23/rspec-attr-protected-matcher</id>
+    <content type="html"><![CDATA[<h2>Custom matcher DSL</h2>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RSpec</span><span class="o">::</span><span class="no">Matchers</span><span class="o">.</span><span class="n">define</span> <span class="ss">:have_something</span> <span class="k">do</span> <span class="o">|</span><span class="n">something</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">match</span> <span class="k">do</span> <span class="o">|</span><span class="n">actual</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;# let assume that object under the test has #has_something? method</span>
+</span><span class='line'><span class="sr">actual.has_something?(something)</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">failure_message_for_should</span> <span class="k">do</span> <span class="o">|</span><span class="n">actual</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;# generate and return the appropriate string.</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">failure_message_for_should_not</span> <span class="k">do</span> <span class="o">|</span><span class="n">actual</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;# generate and return the appropriate string.</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">description</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;# generate and return the appropriate string.</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">describe</span> <span class="no">Something</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">subject</span> <span class="p">{</span> <span class="no">Something</span><span class="o">.</span><span class="n">new</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_something</span><span class="p">(</span><span class="s1">&#39;a thing&#39;</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Custom matcher for testing attr_protected</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RSpec</span><span class="o">::</span><span class="no">Matchers</span><span class="o">.</span><span class="n">define</span> <span class="ss">:protect_attribute</span> <span class="k">do</span> <span class="o">|</span><span class="n">attribute</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="kp">nil</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">match</span> <span class="k">do</span> <span class="o">|</span><span class="n">record</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;old_value = record[attribute]</span>
+</span><span class='line'><span class="sr">record.update_attributes(attribute.to_sym =&amp;gt; value)</span>
+</span><span class='line'><span class="sr">record[attribute] == old_value</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">failure_message</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;&quot;</span><span class="si">#{</span><span class="n">subject</span><span class="o">.</span><span class="n">class</span><span class="si">}</span><span class="sr"> should protect attribute </span><span class="si">#{</span><span class="n">attribute</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="sr">&quot;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Topic</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">:message</span>
+</span><span class='line'><span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;describe Topic do</span>
+</span><span class='line'><span class="sr">  it { should have_db_column(:title) }</span>
+</span><span class='line'><span class="sr">  it { should have_db_column(:message) }</span>
+</span><span class='line'><span class="sr">  it { should have_db_column(:status) }&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">protect_attribute</span><span class="p">(</span><span class="ss">:status</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Testing named scopes in Ruby on Rails 3.x]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/06/22/testing-named-scopes-in-rails-3/"/>
+    <updated>2011-06-22T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/06/22/testing-named-scopes-in-rails-3</id>
+    <content type="html"><![CDATA[<h2>The code</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Topic</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="no">STATUS_PENDING</span> <span class="o">=</span> <span class="s1">&#39;pending&#39;</span>
+</span><span class='line'>  <span class="no">STATUS_ACCEPTED</span> <span class="o">=</span> <span class="s1">&#39;accepted&#39;</span>
+</span><span class='line'>  <span class="no">STATUS_DONE</span> <span class="o">=</span> <span class="s1">&#39;done&#39;</span>
+</span><span class='line'>  <span class="no">STATUSES</span> <span class="o">=</span> <span class="o">[</span><span class="no">STATUS_PENDING</span><span class="p">,</span> <span class="no">STATUS_ACCEPTED</span><span class="p">,</span> <span class="no">STATUS_DONE</span><span class="o">].</span><span class="n">freeze</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  ## Scopes</span>
+</span><span class='line'><span class="sr">  default_scope :order =&gt; &#39;created_at DESC&#39;</span>
+</span><span class='line'><span class="sr">  # statuses</span>
+</span><span class='line'><span class="sr">  scope :pending, where(:status =&gt; STATUS_PENDING)</span>
+</span><span class='line'><span class="sr">  scope :accepted, where(:status =&gt; STATUS_ACCEPTED)</span>
+</span><span class='line'><span class="sr">  scope :done, where(:status =&gt; STATUS_DONE)</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">Topic</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  describe &quot;scopes&quot; do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">describe</span> <span class="ss">:default</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">specify</span> <span class="p">{</span> <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">.</span><span class="n">scoped</span><span class="o">.</span><span class="n">arel</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="s1">&#39;created_at DESC&#39;</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s2">&quot;statuses&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">::</span><span class="no">STATUSES</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">status</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">describe</span> <span class="n">status</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">specify</span> <span class="p">{</span> <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">where_values_hash</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="p">{</span> <span class="ss">:status</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">status</span> <span class="p">}</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails flash messages helper]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/06/21/rails-flash-messages-helper/"/>
+    <updated>2011-06-21T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/06/21/rails-flash-messages-helper</id>
+    <content type="html"><![CDATA[<h2>The code</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  def flash_messages&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="k">if</span> <span class="n">flash</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">content_tag</span><span class="p">(</span><span class="ss">:ul</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s1">&#39;flash-messages&#39;</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">flash</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">type</span><span class="p">,</span> <span class="n">message</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">content_tag</span><span class="p">(</span><span class="ss">:li</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s2">&quot;flash-message </span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">html_safe</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>The spec</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;describe ApplicationHelper do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">describe</span> <span class="s2">&quot;#flash_messages&quot;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;context &quot;when there is no flash messages&quot; do</span>
+</span><span class='line'><span class="sr">  it &quot;should return nothing&quot; do</span>
+</span><span class='line'><span class="sr">    helper.flash_messages.should be_nil</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">context &quot;when there are some flash messages&quot; do</span>
+</span><span class='line'><span class="sr">  let(:flashes) do</span>
+</span><span class='line'><span class="sr">    { :notice =&amp;gt; &#39;Battlestation operational&#39;,</span>
+</span><span class='line'><span class="sr">      :error =&amp;gt; &#39;Hudson, we have a problem!&#39;,</span>
+</span><span class='line'><span class="sr">      :warning =&amp;gt; &quot;I&#39;m sorry Dave, I&#39;m afraid I can&#39;t do that&quot; }</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">  before do</span>
+</span><span class='line'><span class="sr">    flashes.each { |type, message| flash[type] = message }</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">  subject { helper.flash_messages }</span>
+</span><span class='line'><span class="sr">  it &quot;should render a list with flash messages&quot; do</span>
+</span><span class='line'><span class="sr">    should have_selector(&#39;ul&#39;, :id =&amp;gt; &#39;flash-messages&#39;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">    flashes.each do |type, message|</span>
+</span><span class='line'><span class="sr">      should have_selector(&quot;li&quot;, :class =&amp;gt; &quot;flash-message </span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="sr">&quot;, :content =&amp;gt; message)</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>The usage</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="ni">&amp;lt;</span>%= flash_messages %&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>..and the output</h2>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;flash-messages&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;flash-message notice&quot;</span><span class="nt">&gt;</span>Vote was added.<span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

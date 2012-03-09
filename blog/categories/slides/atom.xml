@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: slides | Łukasz Kazimierz Bandzarewicz]]></title>
+  <link href="http://blog.bandzarewicz.com/blog/categories/slides/atom.xml" rel="self"/>
+  <link href="http://blog.bandzarewicz.com/"/>
+  <updated>2012-03-09T11:14:47+01:00</updated>
+  <id>http://blog.bandzarewicz.com/</id>
+  <author>
+    <name><![CDATA[Łukasz Bandzarewicz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[KRUG The perfect RSpec]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/09/27/krug-the-perfect-rspec/"/>
+    <updated>2011-09-27T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/09/27/krug-the-perfect-rspec</id>
+    <content type="html"><![CDATA[<p>Slajdy z prezentacji: <a href="http://blog.bandzarewicz.com/slides/krug-the-perfect-rspec">The perfect RSpec</a></p>
+
+<h2>Przydatke linki</h2>
+
+<ul>
+<li>DSL or not DSL: <a href="http://blog.plataformatec.com.br/2010/06/dsl-or-nodsl-at-euruko-2010/">http://blog.plataformatec.com.br/2010/06/dsl-or-nodsl-at-euruko-2010/</a></li>
+</ul>
+
+
+<h3>RSpec best practices</h3>
+
+<ul>
+<li><p><a href="http://blog.carbonfive.com/2010/10/21/rspec-best-practices/">RSpec best practices</a></p></li>
+<li><p><a href="http://eggsonbread.com/2010/03/28/my-rspec-best-practices-and-tips/">(My) RSpec best practices and tips</a></p></li>
+<li><p><a href="http://kpumuk.info/ruby-on-rails/my-top-7-rspec-best-practices/">http://kpumuk.info/ruby-on-rails/my-top-7-rspec-best-practices/</a></p></li>
+<li><p><a href="http://bitfluxx.com/2011/05/23/some-rspec-tips-and-best-practices.html">Some RSpec Tips and Best Practices</a></p></li>
+</ul>
+
+
+<h3>Domain objects</h3>
+
+<ul>
+<li><p><a href="http://solnic.eu/2011/08/01/making-activerecord-models-thin.html">Making ActiveRecord Models Thin</a></p></li>
+<li><p><a href="http://robots.thoughtbot.com/post/9888374844/a-paperclip-refactoring-tale-part-one-dependency">A Paperclip Refactoring Tale: Part One: Dependency Injection</a></p></li>
+<li><p><a href="http://blog.steveklabnik.com/2011/09/06/the-secret-to-rails-oo-design.html">The Secret to Rails OO Design</a></p></li>
+<li><p><a href="http://blog.steveklabnik.com/2011/09/22/extracting-domain-models-a-practical-example.html">Extracting Domain Models: A Practical Exampl</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[KRUG Rails 3.1 Engines]]></title>
+    <link href="http://blog.bandzarewicz.com/blog/2011/07/04/krug-rails-engines/"/>
+    <updated>2011-07-04T00:00:00+02:00</updated>
+    <id>http://blog.bandzarewicz.com/blog/2011/07/04/krug-rails-engines</id>
+    <content type="html"><![CDATA[<p>Slajdy z prezentacji: <a href="http://blog.bandzarewicz.com/slides/krug-rails-3.1-engines">KRUG Rails 3.1 Engines</a></p>
+
+<h2>Kody źródłowe</h2>
+
+<ul>
+<li><p>Slajdy z prezentacji: <a href="https://github.com/lucassus/krug-rails-3.1-engines-slides">https://github.com/lucassus/krug-rails-3.1-engines-slides</a></p></li>
+<li><p>Przykładowy Rails 3.1 engine: <a href="https://github.com/lucassus/krug_forum">https://github.com/lucassus/krug_forum</a></p></li>
+<li><p>..i jego użycie: <a href="https://github.com/lucassus/krug_forum_demo">https://github.com/lucassus/krug_forum_demo</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

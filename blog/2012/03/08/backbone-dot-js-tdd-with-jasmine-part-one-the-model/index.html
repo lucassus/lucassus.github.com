@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Łukasz Kazimierz Bandzarewicz</title>
+  <title>Backbone.js TDD with jasmine part one: The model - Łukasz Kazimierz Bandzarewicz</title>
   <meta name="author" content="Łukasz Bandzarewicz">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.bandzarewicz.com">
+  <link rel="canonical" href="http://blog.bandzarewicz.com/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -75,15 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model/">Backbone.js TDD With Jasmine Part One: The Model</a></h1>
+      <h1 class="entry-title">Backbone.js TDD With Jasmine Part One: The Model</h1>
     
     
       <p class="meta">
@@ -106,7 +103,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>Initial Ruby on Rails application</h2>
+<div class="entry-content"><h2>Initial Ruby on Rails application</h2>
 
 <p>The initial rails application can be downloaded from github repo: <a href="https://github.com/lucassus/tdd-with-backbonejs/tree/000-basic-app">000-basic-app@tdd-with-backbonejs</a></p>
 
@@ -1300,300 +1297,16 @@ In the backbone docs for this method we find the following description:</p>
 
 <p>Stay tuned, there will be more: &#8220;Part two: The collection&#8221; and &#8220;Part three: The view&#8221;.. and maybe something about Routers.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/08/jasmine-matchers-disassembled/">Jasmine Matchers Disassembled</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Łukasz Bandzarewicz</span></span>
 
-<time datetime="2012-03-08T18:07:00+01:00" pubdate data-updated="true">Mar 8<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a name="home"></a>
-Disassembled matchers for jasmine 1.1.0</p>
-
-<p>Go to matcher:
-<a href="#toBeTruthy">toBeTruthy()</a> |
-<a href="#toBeFalsy">toBeFalsy()</a> |
-<a href="#toBeDefined">toBeDefined()</a> |
-<a href="#toBeUndefined">toBeUndefined()</a> |
-<a href="#toBeNull">toBeNull()</a> |
-<a href="#toEqual">toEqual()</a> |
-<a href="#toContain">toContain()</a> |
-<a href="#toBeLessThan">toBeLessThan(), toBeGreaterThan()</a> |
-<a href="#toMatch">toMatch()</a> |
-<a href="#toThrow">toThrow()</a></p>
-
-<p><a name="toBeTruthy"></a></p>
-
-<h2>toBeTruthy</h2>
-
-<p>Matcher that boolean not-nots the actual. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L156'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeTruthy</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="o">!!</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 695px" src="http://jsfiddle.net/ScTrG/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toBeFalsy"></a></p>
-
-<h2>toBeFalsy</h2>
-
-<p>Matcher that boolean nots the actual. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L164'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeFalsy</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 315px" src="http://jsfiddle.net/f99mv/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toBeDefined"></a></p>
-
-<h2>toBeDefined</h2>
-
-<p>Matcher that compares the actual to jasmine.undefined. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L135'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeDefined</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">!==</span> <span class="nx">jasmine</span><span class="p">.</span><span class="kc">undefined</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 395px" src="http://jsfiddle.net/ZG6uH/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toBeUndefined"></a></p>
-
-<h2>toBeUndefined</h2>
-
-<p>Matcher that compares the actual to jasmine.undefined. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L135'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeUndefined</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">===</span> <span class="nx">jasmine</span><span class="p">.</span><span class="kc">undefined</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a name="toBeNull"></a></p>
-
-<h2>toBeNull</h2>
-
-<p>Matcher that compares the actual to null. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L149'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeNull</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">===</span> <span class="kc">null</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 400px" src="http://jsfiddle.net/kvbsv/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toEqual"></a></p>
-
-<h2>toEqual</h2>
-
-<p>Compares the actual to the expected using common sense equality. Handles Objects, Arrays, etc. <a href="#home">Home</a></p>
-
-<iframe style="width: 100%; height: 695px" src="http://jsfiddle.net/7q9N7/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toContain"></a></p>
-
-<h2>toContain</h2>
-
-<p>Matcher that checks that the expected item is an element in the actual Array. <a href="#home">Home</a></p>
-
-<iframe style="width: 100%; height: 335px" src="http://jsfiddle.net/5Xtv8/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toBeLessThan"></a></p>
-
-<h2>toBeLessThan, toBeGreaterThan</h2>
-
-<p><a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L286'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeLessThan</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">&lt;</span> <span class="nx">expected</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toBeGreaterThan</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">&gt;</span> <span class="nx">expected</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 400px" src="http://jsfiddle.net/5GNac/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toMatch"></a></p>
-
-<h2>toMatch</h2>
-
-<p>Matcher that compares the actual to the expected using a regular expression. Constructs a RegExp, so takes a pattern or a String. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L119'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toMatch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">expected</span><span class="p">).</span><span class="nx">test</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">actual</span><span class="p">);</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 260px" src="http://jsfiddle.net/Asnt5/embedded/js,result/presentation/"></iframe>
-
-
-<p><a name="toThrow"></a></p>
-
-<h2>toThrow</h2>
-
-<p>Matcher that checks that the expected exception was thrown by the actual. <a href="#home">Home</a></p>
-
-<figure class='code'><figcaption><span>source </span><a href='https://github.com/pivotal/jasmine/blob/c2160477114d7a5b28c36c6c03c8f6c13f8634b4/src/core/Matchers.js#L316'>link</a></figcaption> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">jasmine</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toThrow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">expected</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">exception</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">actual</span> <span class="o">!=</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Actual is not a function&#39;</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">try</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">actual</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">exception</span> <span class="o">=</span> <span class="nx">e</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">exception</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">result</span> <span class="o">=</span> <span class="p">(</span><span class="nx">expected</span> <span class="o">===</span> <span class="nx">jasmine</span><span class="p">.</span><span class="kc">undefined</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">equals_</span><span class="p">(</span><span class="nx">exception</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">exception</span><span class="p">,</span> <span class="nx">expected</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">expected</span><span class="p">));</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">var</span> <span class="nx">not</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">isNot</span> <span class="o">?</span> <span class="s2">&quot;not &quot;</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">exception</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">expected</span> <span class="o">===</span> <span class="nx">jasmine</span><span class="p">.</span><span class="kc">undefined</span> <span class="o">||</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">equals_</span><span class="p">(</span><span class="nx">exception</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">exception</span><span class="p">,</span> <span class="nx">expected</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">expected</span><span class="p">)))</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;Expected function &quot;</span> <span class="o">+</span> <span class="nx">not</span> <span class="o">+</span> <span class="s2">&quot;to throw&quot;</span><span class="p">,</span> <span class="nx">expected</span> <span class="o">?</span> <span class="nx">expected</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">expected</span> <span class="o">:</span> <span class="s2">&quot;an exception&quot;</span><span class="p">,</span> <span class="s2">&quot;, but it threw&quot;</span><span class="p">,</span> <span class="nx">exception</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">exception</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">return</span> <span class="s2">&quot;Expected function to throw an exception.&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
-</span><span class='line'><span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<iframe style="width: 100%; height: 360px" src="http://jsfiddle.net/FKeNg/embedded/js,result/presentation/"></iframe>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/08/jasmine-cheat-sheet/">Jasmine Cheat Sheet</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -1605,498 +1318,40 @@ Disassembled matchers for jasmine 1.1.0</p>
   
 
 
-<time datetime="2012-03-08T12:35:00+01:00" pubdate data-updated="true">Mar 8<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>BDD for JavaScript</p>
-
-<blockquote><p>Jasmine is a behavior-driven development framework for testing your JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests.</p></blockquote>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/03/08/jasmine-cheat-sheet/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2012-03-08T19:40:00+01:00" pubdate data-updated="true">Mar 8<span>th</span>, 2012</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/27/krug-the-perfect-rspec/">KRUG the Perfect RSpec</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/krug/'>KRUG</a>, <a class='category' href='/blog/categories/backbone-js/'>backbone.js</a>, <a class='category' href='/blog/categories/jasmine/'>jasmine</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/sinon-js/'>sinon.js</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
 
 
-<time datetime="2011-09-27T00:00:00+02:00" pubdate data-updated="true">Sep 27<span>th</span>, 2011</time>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>Slajdy z prezentacji: <a href="/slides/krug-the-perfect-rspec">The perfect RSpec</a></p>
-
-<h2>Przydatke linki</h2>
-
-<ul>
-<li>DSL or not DSL: <a href="http://blog.plataformatec.com.br/2010/06/dsl-or-nodsl-at-euruko-2010/">http://blog.plataformatec.com.br/2010/06/dsl-or-nodsl-at-euruko-2010/</a></li>
-</ul>
-
-
-<h3>RSpec best practices</h3>
-
-<ul>
-<li><p><a href="http://blog.carbonfive.com/2010/10/21/rspec-best-practices/">RSpec best practices</a></p></li>
-<li><p><a href="http://eggsonbread.com/2010/03/28/my-rspec-best-practices-and-tips/">(My) RSpec best practices and tips</a></p></li>
-<li><p><a href="http://kpumuk.info/ruby-on-rails/my-top-7-rspec-best-practices/">http://kpumuk.info/ruby-on-rails/my-top-7-rspec-best-practices/</a></p></li>
-<li><p><a href="http://bitfluxx.com/2011/05/23/some-rspec-tips-and-best-practices.html">Some RSpec Tips and Best Practices</a></p></li>
-</ul>
-
-
-<h3>Domain objects</h3>
-
-<ul>
-<li><p><a href="http://solnic.eu/2011/08/01/making-activerecord-models-thin.html">Making ActiveRecord Models Thin</a></p></li>
-<li><p><a href="http://robots.thoughtbot.com/post/9888374844/a-paperclip-refactoring-tale-part-one-dependency">A Paperclip Refactoring Tale: Part One: Dependency Injection</a></p></li>
-<li><p><a href="http://blog.steveklabnik.com/2011/09/06/the-secret-to-rails-oo-design.html">The Secret to Rails OO Design</a></p></li>
-<li><p><a href="http://blog.steveklabnik.com/2011/09/22/extracting-domain-models-a-practical-example.html">Extracting Domain Models: A Practical Exampl</a></p></li>
-</ul>
-
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.bandzarewicz.com/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model/" data-via="lucassus" data-counturl="http://blog.bandzarewicz.com/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/04/krug-rails-engines/">KRUG Rails 3.1 Engines</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-04T00:00:00+02:00" pubdate data-updated="true">Jul 4<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Slajdy z prezentacji: <a href="/slides/krug-rails-3.1-engines">KRUG Rails 3.1 Engines</a></p>
-
-<h2>Kody źródłowe</h2>
-
-<ul>
-<li><p>Slajdy z prezentacji: <a href="https://github.com/lucassus/krug-rails-3.1-engines-slides">https://github.com/lucassus/krug-rails-3.1-engines-slides</a></p></li>
-<li><p>Przykładowy Rails 3.1 engine: <a href="https://github.com/lucassus/krug_forum">https://github.com/lucassus/krug_forum</a></p></li>
-<li><p>..i jego użycie: <a href="https://github.com/lucassus/krug_forum_demo">https://github.com/lucassus/krug_forum_demo</a></p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/blog/2012/03/08/jasmine-matchers-disassembled/" title="Previous Post: Jasmine matchers disassembled">&laquo; Jasmine matchers disassembled</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/23/rspec-attr-protected-matcher/">Rspec Matcher for Testing Model&#8217;s Attr_protected Fields</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-23T00:00:00+02:00" pubdate data-updated="true">Jun 23<span>rd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Custom matcher DSL</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/06/23/rspec-attr-protected-matcher/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/22/testing-named-scopes-in-rails-3/">Testing Named Scopes in Ruby on Rails 3.x</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-22T00:00:00+02:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>The code</h2>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Topic</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="no">STATUS_PENDING</span> <span class="o">=</span> <span class="s1">&#39;pending&#39;</span>
-</span><span class='line'>  <span class="no">STATUS_ACCEPTED</span> <span class="o">=</span> <span class="s1">&#39;accepted&#39;</span>
-</span><span class='line'>  <span class="no">STATUS_DONE</span> <span class="o">=</span> <span class="s1">&#39;done&#39;</span>
-</span><span class='line'>  <span class="no">STATUSES</span> <span class="o">=</span> <span class="o">[</span><span class="no">STATUS_PENDING</span><span class="p">,</span> <span class="no">STATUS_ACCEPTED</span><span class="p">,</span> <span class="no">STATUS_DONE</span><span class="o">].</span><span class="n">freeze</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">## Scopes</span>
-</span><span class='line'>  <span class="n">default_scope</span> <span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;created_at DESC&#39;</span>
-</span><span class='line'>  <span class="c1"># statuses</span>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:pending</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:status</span> <span class="o">=&gt;</span> <span class="no">STATUS_PENDING</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:accepted</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:status</span> <span class="o">=&gt;</span> <span class="no">STATUS_ACCEPTED</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">scope</span> <span class="ss">:done</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:status</span> <span class="o">=&gt;</span> <span class="no">STATUS_DONE</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">Topic</span> <span class="k">do</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">describe</span> <span class="s2">&quot;scopes&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">describe</span> <span class="ss">:default</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">specify</span> <span class="p">{</span> <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">.</span><span class="n">scoped</span><span class="o">.</span><span class="n">arel</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="s1">&#39;created_at DESC&#39;</span><span class="o">]</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">describe</span> <span class="s2">&quot;statuses&quot;</span> <span class="k">do</span>
-</span><span class='line'>      <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">::</span><span class="no">STATUSES</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">status</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">describe</span> <span class="n">status</span> <span class="k">do</span>
-</span><span class='line'>          <span class="n">specify</span> <span class="p">{</span> <span class="no">Cse</span><span class="o">::</span><span class="no">Topic</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">where_values_hash</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="p">{</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="n">status</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>        <span class="k">end</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/21/rails-flash-messages-helper/">Rails Flash Messages Helper</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-21T00:00:00+02:00" pubdate data-updated="true">Jun 21<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>The code</h2>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">ApplicationHelper</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">flash_messages</span>
-</span><span class='line'>    <span class="k">return</span> <span class="k">if</span> <span class="n">flash</span><span class="o">.</span><span class="n">empty?</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">content_tag</span><span class="p">(</span><span class="ss">:ul</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;flash-messages&#39;</span><span class="p">)</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">flash</span><span class="o">.</span><span class="n">collect</span> <span class="k">do</span> <span class="o">|</span><span class="n">type</span><span class="p">,</span> <span class="n">message</span><span class="o">|</span>
-</span><span class='line'>        <span class="n">content_tag</span><span class="p">(</span><span class="ss">:li</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;flash-message </span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">end</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">html_safe</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>The spec</h2>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">describe</span> <span class="no">ApplicationHelper</span> <span class="k">do</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">describe</span> <span class="s2">&quot;#flash_messages&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">context</span> <span class="s2">&quot;when there is no flash messages&quot;</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">it</span> <span class="s2">&quot;should return nothing&quot;</span> <span class="k">do</span>
-</span><span class='line'>        <span class="n">helper</span><span class="o">.</span><span class="n">flash_messages</span><span class="o">.</span><span class="n">should</span> <span class="n">be_nil</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">context</span> <span class="s2">&quot;when there are some flash messages&quot;</span> <span class="k">do</span>
-</span><span class='line'>      <span class="n">let</span><span class="p">(</span><span class="ss">:flashes</span><span class="p">)</span> <span class="k">do</span>
-</span><span class='line'>        <span class="p">{</span> <span class="ss">:notice</span> <span class="o">=&gt;</span> <span class="s1">&#39;Battlestation operational&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:error</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hudson, we have a problem!&#39;</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:warning</span> <span class="o">=&gt;</span> <span class="s2">&quot;I&#39;m sorry Dave, I&#39;m afraid I can&#39;t do that&quot;</span> <span class="p">}</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">before</span> <span class="k">do</span>
-</span><span class='line'>        <span class="n">flashes</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">type</span><span class="p">,</span> <span class="n">message</span><span class="o">|</span> <span class="n">flash</span><span class="o">[</span><span class="n">type</span><span class="o">]</span> <span class="o">=</span> <span class="n">message</span> <span class="p">}</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">subject</span> <span class="p">{</span> <span class="n">helper</span><span class="o">.</span><span class="n">flash_messages</span> <span class="p">}</span>
-</span><span class='line'>      <span class="n">it</span> <span class="s2">&quot;should render a list with flash messages&quot;</span> <span class="k">do</span>
-</span><span class='line'>        <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s1">&#39;flash-messages&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">flashes</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">type</span><span class="p">,</span> <span class="n">message</span><span class="o">|</span>
-</span><span class='line'>          <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;flash-message </span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="n">message</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">end</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>The usage</h2>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= flash_messages %&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>..and the output</h2>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;flash-messages&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;flash-message notice&quot;</span><span class="nt">&gt;</span>Vote was added.<span class="nt">&lt;/li&gt;</span>
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/03/21/coming-soon/">The Content Is Coming&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-21T00:00:00+01:00" pubdate data-updated="true">Mar 21<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Coming soon&#8230;</p>
-
-<figure class='code'><figcaption><span>&#8220;my_blog_spec.rb&#8221;  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">describe</span> <span class="no">MyBlog</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;should soon have a content&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -2129,7 +1384,7 @@ Disassembled matchers for jasmine 1.1.0</p>
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -2146,7 +1401,7 @@ Disassembled matchers for jasmine 1.1.0</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/lucassus">@lucassus</a> on GitHub
@@ -2187,6 +1442,7 @@ Disassembled matchers for jasmine 1.1.0</p>
 
   
 </aside>
+
 
     </div>
   </div>
