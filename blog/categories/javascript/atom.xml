@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Łukasz Kazimierz Bandzarewicz]]></title>
   <link href="http://blog.bandzarewicz.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.bandzarewicz.com/"/>
-  <updated>2012-03-09T13:08:27+01:00</updated>
+  <updated>2012-03-12T10:20:54+01:00</updated>
   <id>http://blog.bandzarewicz.com/</id>
   <author>
     <name><![CDATA[Łukasz Bandzarewicz]]></name>
@@ -809,61 +809,6 @@ In the backbone docs for this method we find the following description:</p>
 
 <p><blockquote><p>Return a copy of the model's attributes for JSON stringification. This can be used for persistence, serialization, or for augmentation before being handed off to a view.</p></blockquote></p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>spec/javascripts/models/task_spec.js  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;TodoList.Models.Task&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="c1">// ..</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#save&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">server</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fakeServer</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;sends valid data to the server&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;A new task to do&#39;</span><span class="p">});</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">requests</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">expect</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">task</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
-</span><span class='line'>        <span class="nx">expect</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">name</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="s1">&#39;A new task to do&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">expect</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">task</span><span class="p">.</span><span class="nx">complete</span><span class="p">).</span><span class="nx">toBeFalsy</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app/assets/javascripts/models/task.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -896,6 +841,8 @@ In the backbone docs for this method we find the following description:</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Green again but <code>url</code> attribute definitely is not what we want. For creating task it should be <code>/tasks.json</code> (along with <code>POST</code> request method) and for updating existing task's attributes it should be <code>/tasks/:id.json</code> (along with <code>PUT</code> request method). Let write some specs for those scenarios:</p>
+
+<p>Let's override this method:</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>spec/javascripts/models/task_spec.js  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
