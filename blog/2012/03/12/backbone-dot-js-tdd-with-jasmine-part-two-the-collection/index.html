@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Backbone.js TDD with jasmine part two: The collection - Łukasz Kazimierz Bandzarewicz</title>
+  <meta name="author" content="Łukasz Bandzarewicz">
+
+  
+  <meta name="description" content="In the previous part Backbone.js TDD with jasmine part one: The model we created a simple TodoList.Models.Task model for handling creating and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.bandzarewicz.com/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Łukasz Kazimierz Bandzarewicz" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-655293-7']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Łukasz Kazimierz Bandzarewicz</a></h1>
+  
+    <h2>@lucassus</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.bandzarewicz.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Backbone.js TDD With Jasmine Part Two: The Collection</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T10:22:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the previous part <a href="http://blog.bandzarewicz.com/blog/backbone-dot-js-tdd-with-jasmine-part-two-the-collection">Backbone.js TDD with jasmine part one: The model</a> we created a simple <code>TodoList.Models.Task</code> model for handling creating and updating a task.
+Code from the previous step can be downloaded from github repository: <a href="https://github.com/lucassus/tdd-with-backbonejs/tree/004-complete-task-model">004-complete-task-model@tdd-with-backbonejs</a></p>
+
+<p>Now it&#8217;s time to create a <code>TodoList.Collections.Tasks</code> collection. Generally in backbone.js collections are ordered sets of models. In our application we will use this collection for fetching tasks from the serer (<code>fetch</code> method) and for creating new task (<code>create</code> method).</p>
+
+<!-- more -->
+
+
+<p>Firstly, let’s test that we can add instantiate to the collection.</p>
+
+<figure class='code'><figcaption><span>spec/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;TodoList.Collections.Tasks&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;should be defined&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;can be instantiated&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">();</span>
+</span><span class='line'>    <span class="nx">expect</span><span class="p">(</span><span class="nx">tasks</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeNull</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obviously we need a <code>Tasks</code> collection, so let&#8217;s add it:</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>TIP: Don&#8217;t forget to add <code>TodoList.Collections</code> namespace and require all files from <code>app/assets/javascripts/collections</code> directory:</p>
+
+<figure class='code'><figcaption><span>spec/javascripts/todo_list.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require_self</span>
+</span><span class='line'><span class="c1">//= require_tree ./models</span>
+</span><span class='line'><span class="c1">//= require_tree ./collections</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">TodoList</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">Models</span><span class="o">:</span> <span class="p">{},</span>
+</span><span class='line'>  <span class="nx">Collections</span><span class="o">:</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We will use our new <code>TodoList.Collections.Tasks</code> for fetching tasks from the server side. Let&#8217;s write a simple scenario for the <code>fetch</code> method.
+Firstly let&#8217;s write a test which will check that the request to the server is correct:</p>
+
+<figure class='code'><figcaption><span>spec/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;TodoList.Collections.Tasks&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">tasks</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">server</span> <span class="o">=</span> <span class="nx">sinon</span><span class="p">.</span><span class="nx">fakeServer</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">request</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">requests</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">itShouldBeGET</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">itShouldBeAsync</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">itShouldHaveUrl</span><span class="p">(</span><span class="s1">&#39;/tasks.json&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And run the test..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TodoList.Collections.Tasks
+</span><span class='line'>  #fetch
+</span><span class='line'>    request
+</span><span class='line'>      ✘ should be POST
+</span><span class='line'>        ➤ Error: A "url" property or function must be specified
+</span><span class='line'>        ➤ TypeError: 'undefined' is not an object
+</span><span class='line'>      ✘ should be async
+</span><span class='line'>        ➤ Error: A "url" property or function must be specified
+</span><span class='line'>        ➤ TypeError: 'undefined' is not an object
+</span><span class='line'>      ✘ should have url /tasks.json
+</span><span class='line'>        ➤ Error: A "url" property or function must be specified
+</span><span class='line'>        ➤ TypeError: 'undefined' is not an object
+</span><span class='line'>ERROR: 23 specs, 6 failures</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It seems we need a <code>url</code> property defined in our collection. This is easy to fix, we just add a url property to our Todos collection:</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">url</span> <span class="s1">&#39;/tasks.json&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Green!</p>
+
+<p>In the next step we will check that when the server responds, the collection creates models representing the JSON returned. For this we’ll need to have our fake server respond with some JSON data. We expand our <code>beforeEach</code> function to include this:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/tasks.json&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span><span class='line'>    <span class="mi">200</span><span class="p">,</span>
+</span><span class='line'>    <span class="p">{</span> <span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span> <span class="s2">&quot;application/json&quot;</span> <span class="p">},</span>
+</span><span class='line'>    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">responseFixture</span><span class="p">)</span>
+</span><span class='line'><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see in this example we&#8217;re stubbing server&#8217;s response with sinon&#8217;s <code>respondWith</code> helper method. The fake server’s <code>respondWith</code> method takes three arguments here. The first and second are the HTTP request method and URL to respond to. The final argument is an array representing the response that is returned, which itself has three values: the HTTP response code, an object literal of response headers, and a string containing the response body.
+Variable <code>responseFixture</code> will contain an object with our dummy data and we&#8217;re using <code>JSON.stringify</code> to convert this object to the JSON string (returned by the fake server).</p>
+
+<p>The complete spec should look like this:</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;TodoList.Collections.Tasks&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;#fetch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// ...</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;on success&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">responseFixture</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">tasks</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">11</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;First task&#39;</span><span class="p">,</span> <span class="nx">complete</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Second task&#39;</span><span class="p">,</span> <span class="nx">complete</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+</span><span class='line'>            <span class="p">]</span> <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">respondWith</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/tasks.json&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span><span class='line'>                    <span class="mi">200</span><span class="p">,</span>
+</span><span class='line'>                    <span class="p">{</span> <span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span> <span class="s2">&quot;application/json&quot;</span> <span class="p">},</span>
+</span><span class='line'>                    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">responseFixture</span><span class="p">)</span>
+</span><span class='line'>                <span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span>
+</span><span class='line'>                <span class="k">this</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">respond</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;loaded tasks collection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;loads all tasks&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">models</span><span class="p">.</span><span class="nx">length</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>                <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;parses tasks from the response&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">11</span><span class="p">).</span><span class="nx">getName</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="s1">&#39;First task&#39;</span><span class="p">);</span>
+</span><span class='line'>                    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">11</span><span class="p">).</span><span class="nx">getComplete</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="nx">getName</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="s1">&#39;Second task&#39;</span><span class="p">);</span>
+</span><span class='line'>                    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="nx">getComplete</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>                <span class="p">});</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>TIP: Don&#8217;t forget about <code>this.server.respond()</code> method call, otherwise the collection won&#8217;t receive fixture data from the server.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>TodoList.Collections.Tasks
+</span><span class='line'>  #fetch
+</span><span class='line'>    on success
+</span><span class='line'>      loaded tasks collection
+</span><span class='line'>        ✘ loads all tasks
+</span><span class='line'>          ➤ Expected 1 to equal 2.
+</span><span class='line'>        ✘ parses tasks from the response
+</span><span class='line'>          ➤ TypeError: 'undefined' is not an object</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We have to override <code>TodoList.Collections.Tasks#parse</code> method:</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">url</span> <span class="s1">&#39;/tasks.json&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">parse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">tasks</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>..and later we should define valid <code>model</code> property on the Collection:</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/collections/tasks.js  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">url</span> <span class="s1">&#39;/tasks.json&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">model</span><span class="o">:</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">Task</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">parse</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">tasks</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should be green again!</p>
+
+<p>Now we have all the functionality to manage tasks from JavaScript. Let&#8217;s create a new task using our collection.</p>
+
+<blockquote><p>collection.create(task)</p><p>Convenience to create a new instance of a model within a collection. Equivalent to instantiating a model with a hash of attributes, saving the model to the server, and adding the model to the set after being successfully created.</p></blockquote>
+
+
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">Task</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;New task to do&#39;</span> <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Collections</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">();</span>
+</span><span class='line'><span class="nx">collection</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">task</span><span class="p">);</span> <span class="c1">// POST /tasks.json</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">collection</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">task</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">models</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">task</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;name, &#39;</span><span class="nx">New</span> <span class="nx">name</span><span class="err">&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">task</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> <span class="c1">// PUT /task/1.json</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">task</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span> <span class="c1">// DELETE /task/1.json</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">task</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TodoList</span><span class="p">.</span><span class="nx">Models</span><span class="p">.</span><span class="nx">Task</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+</span><span class='line'><span class="nx">task</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span> <span class="c1">// GET /tasks/1.json</span>
+</span><span class='line'><span class="c1">// etc.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now it&#8217;s time for the real challenge - the form for adding tasks. Stay tuned!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Łukasz Bandzarewicz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T10:22:00+01:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/krug/'>KRUG</a>, <a class='category' href='/blog/categories/backbone-js/'>backbone.js</a>, <a class='category' href='/blog/categories/jasmine/'>jasmine</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/sinon-js/'>sinon.js</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.bandzarewicz.com/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection/" data-via="lucassus" data-counturl="http://blog.bandzarewicz.com/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model/" title="Previous Post: Backbone.js TDD with jasmine part one: The model">&laquo; Backbone.js TDD with jasmine part one: The model</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection/">Backbone.js TDD with jasmine part two: The collection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/08/backbone-dot-js-tdd-with-jasmine-part-one-the-model/">Backbone.js TDD with jasmine part one: The model</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/08/jasmine-matchers-disassembled/">Jasmine matchers disassembled</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/08/jasmine-cheat-sheet/">Jasmine cheat sheet</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/27/krug-the-perfect-rspec/">KRUG The perfect RSpec</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("lucassus", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/lucassus" class="twitter-follow-button" data-show-count="false">Follow @lucassus</a>
+  
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/lucassus">@lucassus</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'lucassus',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/118001403851269645878?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Łukasz Bandzarewicz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'lukasz-bandzarewicz-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.bandzarewicz.com/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection/';
+        var disqus_url = 'http://blog.bandzarewicz.com/blog/2012/03/12/backbone-dot-js-tdd-with-jasmine-part-two-the-collection/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
